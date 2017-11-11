@@ -1,0 +1,3 @@
+node_modules/
+coverage/
+echo "# Coverage reports\ncoverage\ncoverage/\ncoverage/*\n" >> .gitignore

@@ -13,16 +13,10 @@ exports.CreateAccount = function (req, res) {
         message: 'Senhas Diferentes.'
       })
     }
-    if (Usuario.email == null || Usuario.senha == null || Usuario.senhaConfirmacao == null) {
-      return res.status(400).json({
-        message: 'Informe Todos os dados.'
-      })
-    } else {
       Usuario.save();
       return res.status(201).json({
         message: 'Usuário Criado.'
       })
-    }
   } catch (error) {
     return res.send(error)
   }

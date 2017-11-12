@@ -2,7 +2,9 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var router = require('./Routes/router');
+var router = require('./Routes/router'); 
+var cors = require('cors');
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -12,6 +14,7 @@ mongoose.connect('mongodb://localhost:27017/mydb');
 
 var port = process.env.PORT || 5000;
 
+app.use(cors());
 app.use('/api', router);
 
 app.listen(port);

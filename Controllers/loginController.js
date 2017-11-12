@@ -2,21 +2,28 @@ var User = require('../Models/userModel');
 
 exports.CreateAccount = function (req, res) {
 
-  var Usuario = new User();
-    Usuario.email = req.body.email,
-    Usuario.senha = req.body.senha,
-    Usuario.senhaConfirmacao = req.body.senhaConfirmacao
+  try {
+      var Usuario = new User();
+      Usuario.email = req.body.email,
+      Usuario.senha = req.body.senha,
+      Usuario.senhaConfirmacao = req.body.senhaConfirmacao
 
-  if (Usuario.senha != Usuario.senhaConfirmacao) {
-    res.json(400, {
-      message: 'Senhas Diferentes.'
-    })
-    return 400;
-  } else {
-    Usuario.save();
-    res.json({
-      message: 'Usuário Criado.'
-    })
-    return 200;
+    if (Usuario.senha != Usuario.senhaConfirmacao) {
+      return res.status(400).json({
+        message: 'Senhas Diferentes.'
+      })
+    }
+    if (Usuario.email == null || Usuario.senha == null || Usuario.senhaConfirmacao == null) {
+      return res.status(400).json({
+        message: 'Informe Todos os dados.'
+      })
+    } else {
+      Usuario.save();
+      return res.status(201).json({
+        message: 'Usuário Criado.'
+      })
+    }
+  } catch (error) {
+    return res.send(error)
   }
 }

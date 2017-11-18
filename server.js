@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/mydb');
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 8000;
 
 app.use(cors());
 app.use('/api', router);
